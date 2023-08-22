@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 import { toast } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const socket = io("http://192.168.1.182:3000/");
+const socket = io("http://192.168.1.182/api");
 
 export const App = () => {
   const [stopwatchTime, setStopwatchTime] = useState(0);
@@ -19,7 +19,7 @@ export const App = () => {
   };
 
   const getTimerStatus = async () => {
-    const response = await fetch("http://192.168.1.182:3000/currentStatus", {
+    const response = await fetch("http://192.168.1.182/api/currentStatus", {
       method: "GET",
     });
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

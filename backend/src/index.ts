@@ -71,7 +71,7 @@ const stopTimer = () => {
     }
 }
 
-app.get("/currentStatus", (req, res) => {
+app.get("/api/currentStatus", (req, res) => {
     res.send({
         isTimerRunning,
         timeTimerStarted,
@@ -80,7 +80,7 @@ app.get("/currentStatus", (req, res) => {
     });
 });
 
-app.post("/startTimer", (req, res) => {
+app.post("/api/startTimer", (req, res) => {
     console.log("startTimer");
     if (req.headers.apikey !== api_key) {
         res.sendStatus(401);
@@ -90,7 +90,7 @@ app.post("/startTimer", (req, res) => {
     res.sendStatus(200);
 });
 
-app.post("/stopTimer", (req, res) => {
+app.post("/api/stopTimer", (req, res) => {
     console.log("stopTimer");
     if (req.headers.apikey !== api_key) {
         res.sendStatus(401);
@@ -100,7 +100,7 @@ app.post("/stopTimer", (req, res) => {
     res.sendStatus(200);
 });
 
-app.post("/resetTimer", (req, res) => {
+app.post("/api/resetTimer", (req, res) => {
     if (req.headers.apikey !== api_key) {
         res.sendStatus(401);
         return;
@@ -110,7 +110,7 @@ app.post("/resetTimer", (req, res) => {
     res.sendStatus(200);
 });
 
-app.post("/toggleTimer", (req, res) => {
+app.post("/api/toggleTimer", (req, res) => {
     if (req.headers.apikey !== api_key) {
         res.sendStatus(401);
         return;
@@ -123,7 +123,7 @@ app.post("/toggleTimer", (req, res) => {
     res.sendStatus(200);
 });
 
-app.post("/allowSockets", (req, res) => {
+app.post("/api/allowSockets", (req, res) => {
     if (req.headers.apikey !== api_key) {
         res.sendStatus(401);
         return;
@@ -132,7 +132,7 @@ app.post("/allowSockets", (req, res) => {
     res.sendStatus(200);
 });
 
-app.post("/disallowSockets", (req, res) => {
+app.post("/api/disallowSockets", (req, res) => {
     if (req.headers.apikey !== api_key) {
         res.sendStatus(401);
         return;
@@ -141,7 +141,7 @@ app.post("/disallowSockets", (req, res) => {
     res.sendStatus(200);
 });
 
-app.post("/toggleSockets", (req, res) => {
+app.post("/api/toggleSockets", (req, res) => {
     if (req.headers.apikey !== api_key) {
         res.sendStatus(401);
         return;
