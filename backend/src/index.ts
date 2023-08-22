@@ -81,6 +81,7 @@ app.get("/currentStatus", (req, res) => {
 });
 
 app.post("/startTimer", (req, res) => {
+    console.log("startTimer");
     if (req.headers.apikey !== api_key) {
         res.sendStatus(401);
         return;
@@ -90,6 +91,7 @@ app.post("/startTimer", (req, res) => {
 });
 
 app.post("/stopTimer", (req, res) => {
+    console.log("stopTimer");
     if (req.headers.apikey !== api_key) {
         res.sendStatus(401);
         return;

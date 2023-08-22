@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 import { toast } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const socket = io("http://localhost:3000/");
+const socket = io("http://192.168.1.182:3000/");
 
 export const App = () => {
   const [stopwatchTime, setStopwatchTime] = useState(0);
@@ -19,7 +19,7 @@ export const App = () => {
   };
 
   const getTimerStatus = async () => {
-    const response = await fetch("http://localhost:3000/currentStatus", {
+    const response = await fetch("http://192.168.1.182:3000/currentStatus", {
       method: "GET",
     });
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -65,10 +65,12 @@ export const App = () => {
     });
 
     socket.on("timerStarted", (data: { elapsedTime: number }) => {
+      console.log("timerStarted");
       startTimer(data.elapsedTime);
     });
 
     socket.on("timerStopped", (data: { elapsedTime: number }) => {
+      console.log("timerStopped");
       stopwatchHandler.stop();
       setStopwatchTime(data.elapsedTime);
     });
