@@ -74,6 +74,12 @@ export const App = () => {
       stopwatchHandler.stop();
       setStopwatchTime(data.elapsedTime);
     });
+
+    socket.on("timerCancelled", () => {
+      console.log("timerCancelled");
+      stopwatchHandler.stop();
+      setStopwatchTime(0);
+    })
   }, [socket]);
 
   // Get the timer status on page load
