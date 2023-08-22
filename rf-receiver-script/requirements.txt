@@ -1,0 +1,9 @@
+certifi==2023.7.22
+charset-normalizer==3.2.0
+idna==3.4
+nrf24==2.0.0
+pigpio==1.78
+requests==2.31.0
+RPi.GPIO==0.7.1
+spidev==3.6
+urllib3==2.0.4

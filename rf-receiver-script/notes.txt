@@ -1,0 +1,5 @@
+Need to run the command
+sudo systemctl enable pigpiod
+to enable the gpio pins on boot
+
+I didnt really test the repeatability of this, docker is really just for fun on this
