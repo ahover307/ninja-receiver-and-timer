@@ -28,6 +28,8 @@ services:
     build: ./rf-receiver-script
     depends_on:
       - ninja-backend
+    ports:
+      - "8888:8888"
     restart: unless-stopped
   nginx:
     image: nginx:latest
