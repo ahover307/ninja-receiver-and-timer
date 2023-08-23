@@ -179,6 +179,11 @@ io.on("connection", (socket) => {
     });
 });
 
+app.get("*", (req, res) => {
+    console.log(req);
+    res.status(404).send('Route not found');
+});
+
 console.log("Starting server in " + process.env.NODE_ENV + " mode");
 httpServer.listen(3000, () => {
     console.log("Server started on port 3000");
