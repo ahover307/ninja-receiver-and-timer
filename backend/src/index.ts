@@ -180,7 +180,6 @@ io.on("connection", (socket) => {
 });
 
 app.get("*", (req, res) => {
-    console.log(req);
     res.status(404).send('Route not found');
 });
 

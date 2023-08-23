@@ -2,7 +2,7 @@
 # This script is run at boot to start the application automatically
 
 # Change directory to the application directory
-cd ~/ninja-receiver || exit
+cd ~/Ninja-Receiver-and-timer || exit
 
 # Git pull to update the application
 git pull
