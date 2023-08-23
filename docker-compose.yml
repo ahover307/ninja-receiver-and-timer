@@ -24,7 +24,9 @@ services:
     network_mode: host
     restart: unless-stopped
   nginx:
-    build: ./nginx
+    build:
+      context: ./
+      dockerfile: ./nginx/Dockerfile
     ports:
       - "80:80"
       - "443:443"
