@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 import { toast } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-const socket = io("http://192.168.1.182/api");
+const socket = io("http://192.168.1.182");
 
 export const App = () => {
   const [stopwatchTime, setStopwatchTime] = useState(0);
