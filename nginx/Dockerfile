@@ -1,8 +1,8 @@
 # Build stage
 FROM node:14 as build-stage
 WORKDIR /app
-COPY ../frontend/package.json ./
-COPY ../frontend/yarn.lock ./
+COPY ./frontend/package.json ./
+COPY ./frontend/yarn.lock ./
 RUN yarn install
 COPY . .
 RUN yarn build
