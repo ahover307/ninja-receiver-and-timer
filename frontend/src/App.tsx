@@ -89,7 +89,7 @@ export const App = () => {
 
   const home = (
     <>
-      <h1>Ninja Timer</h1>
+      <h1>Ninja Timer Test</h1>
       <Card>
         <button onClick={() => socket.emit("toggleTimer")}>
           {stopwatchHandler.isRunning() ? "Stop Timer" : "Start Timer"}
