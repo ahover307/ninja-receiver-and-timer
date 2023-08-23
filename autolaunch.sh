@@ -11,7 +11,7 @@ git pull
 docker compose up -d --build
 
 # Open the browser to the application
-chromium-browser --kiosk --incognito --disable-session-crashed-bubble --disable-infobars http://localhost
+chromium-browser --kiosk --incognito --disable-session-crashed-bubble --disable-infobars http://localhost/display
 
 # Exit the script
 exit 0

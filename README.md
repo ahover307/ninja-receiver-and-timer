@@ -17,6 +17,7 @@ for development
 
 
 For prod
+https://forums.raspberrypi.com/viewtopic.php?t=294014
 1. cd into backend and create a .env file with the following variables
 ```
 NODE_ENV=production
