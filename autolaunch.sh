@@ -10,6 +10,9 @@ git pull
 # Set up the docker containers
 docker compose up -d --build
 
+# Hide the cursor
+unclutter -idle 0.1
+
 # Open the browser to the application
 chromium-browser --kiosk --incognito --disable-session-crashed-bubble --disable-infobars http://localhost/display
 
