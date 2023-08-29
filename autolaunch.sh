@@ -15,7 +15,7 @@ docker compose up -d --build
 echo "Finished docker compose"
 
 # Hide the cursor
-unclutter -idle 0.1
+#unclutter -idle 0.1
 
 # Disable the screen saver
 echo "Unclutter was activated"
