@@ -6,7 +6,7 @@ import { io } from "socket.io-client";
 import { toast } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const apiURL: string = import.meta.env.VITE_API_URL;
-const socketURL: string = import.meta.env.VITE_API_URL;
+const socketURL: string = import.meta.env.VITE_SOCKET_URL;
 
 const socket = io(socketURL);
 
