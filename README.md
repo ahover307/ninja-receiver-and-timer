@@ -69,12 +69,14 @@ We need to install the npm projects (as they are node servers), and then we can 
 FIRST: We need to create a .env file in the backend folder with the following variables
 ```
 NODE_ENV=development
-# NODE_ENV=production
+#NODE_ENV=production
 ```
 And in the frontend folder with the following variables
 ```
-VITE_APP_API_URL=http://localhost:3000
-# VITE_APP_API_URL=http://ninjatimer.local:3000 # (That is the hostname I set for my pi, you can use that if you want), or change this to the local ip of your pi
+VITE_API_URL=http://localhost:3000
+VITE_SOCKET_URL=http://localhost:3000
+#VITE_API_URL=http://ninjatimer.local/api # (That is the hostname I set for my pi, you can use that if you want), or change this to the local ip of your pi
+#VITE_SOCKET_URL=http://ninjatimer.local # (That is the hostname I set for my pi, you can use that if you want), or change this to the local ip of your pi
 ```
 Then, returning to the outer directory, run the following commands
 
@@ -84,13 +86,15 @@ Then, returning to the outer directory, run the following commands
 **For prod**
 1. cd into backend and update the .env file to the following variables
 ```
-# NODE_ENV=development
+#NODE_ENV=development
 NODE_ENV=production
 ```
 And the same thing for the frontend:
 ```
-# VITE_APP_API_URL=http://localhost:3000
-VITE_APP_API_URL=http://ninjatimer.local:3000 # (That is the hostname I set for my pi, you can use that if you want), or change this to the local ip of your pi
+#VITE_API_URL=http://localhost:3000
+#VITE_SOCKET_URL=http://localhost:3000
+VITE_API_URL=http://ninjatimer.local/api # (That is the hostname I set for my pi, you can use that if you want), or change this to the local ip of your pi
+VITE_SOCKET_URL=http://ninjatimer.local # (That is the hostname I set for my pi, you can use that if you want), or change this to the local ip of your pi
 ```
 
 Now, before being able to run the script, we need to make sure everything is wired up correctly.

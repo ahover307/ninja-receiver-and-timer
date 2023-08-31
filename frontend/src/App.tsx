@@ -5,8 +5,10 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import { toast } from "react-toastify";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+const apiURL: string = import.meta.env.VITE_API_URL;
+const socketURL: string = import.meta.env.VITE_API_URL;
 
-const socket = io("http://192.168.1.182");
+const socket = io(socketURL);
 
 export const App = () => {
   const [stopwatchTime, setStopwatchTime] = useState(0);
@@ -19,7 +21,7 @@ export const App = () => {
   };
 
   const getTimerStatus = async () => {
-    const response = await fetch("http://192.168.1.182/api/currentStatus", {
+    const response = await fetch(`${apiURL}/currentStatus`, {
       method: "GET",
     });
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -82,7 +84,7 @@ export const App = () => {
     })
   }, [socket]);
 
-  // Get the timer status on page load
+  // Get the timer status on a page load
   useEffect(() => {
     void getTimerStatus();
   }, []);

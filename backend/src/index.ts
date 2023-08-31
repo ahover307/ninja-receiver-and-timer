@@ -7,9 +7,10 @@ require("dotenv").config();
 
 const app = express();
 const httpServer = createServer(app);
+// TODO Figure out the correct way to cors
 const io = new Server(httpServer, {
     cors: {
-        origin: process.env.NODE_ENV === "production" ? false : "*",
+        origin: process.env.NODE_ENV === "production" ? "*" : "*",
         methods: ["GET", "POST"],
     }
 });
@@ -18,14 +19,14 @@ let allowSockets = true;
 
 let api_key = "ucCsHJeM!QqhS2dZH!P3h8A49ocS7&wRzD9%Y9yXTx!Xf4Kegiw6JmHuXnWncZR5!7qXmG";
 
-// TODO Wipe these values before production
 let isTimerRunning = false;
 let timeTimerStarted: number | undefined;
 let timeTimerStopped: number | undefined;
 
 // Set up cors
+// TODO Set up cors properly
 const corsOptions = {
-  origin: process.env.NODE_ENV === "production" ? false : "*",
+  origin: process.env.NODE_ENV === "production" ? "*" : "*",
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
 };
 
