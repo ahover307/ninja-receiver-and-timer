@@ -35,7 +35,7 @@ export const App = () => {
     const seconds = date.getUTCSeconds();
     const millisecondsPart = date.getUTCMilliseconds();
 
-    return `${minutes}:${seconds.toString().padStart(2, "0")}.${millisecondsPart
+    return `${minutes.toString().padStart(2, "0")}:${seconds.toString().padStart(2, "0")}.${millisecondsPart
       .toString()
       .padStart(3, "0")}`;
   };
