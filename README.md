@@ -77,6 +77,9 @@ VITE_API_URL=http://localhost:3000
 VITE_SOCKET_URL=http://localhost:3000
 #VITE_API_URL=http://ninjatimer.local/api # (That is the hostname I set for my pi, you can use that if you want), or change this to the local ip of your pi
 #VITE_SOCKET_URL=http://ninjatimer.local # (That is the hostname I set for my pi, you can use that if you want), or change this to the local ip of your pi
+
+#VITE_TIMER_SLEEP_DELAY=17 # Default is 17
+#VITE_DISPLAY_SCROLL_SPEED=0.0005 # Default is 0.0005
 ```
 Then, returning to the outer directory, run the following commands
 
@@ -95,6 +98,9 @@ And the same thing for the frontend:
 #VITE_SOCKET_URL=http://localhost:3000
 VITE_API_URL=http://ninjatimer.local/api # (That is the hostname I set for my pi, you can use that if you want), or change this to the local ip of your pi
 VITE_SOCKET_URL=http://ninjatimer.local # (That is the hostname I set for my pi, you can use that if you want), or change this to the local ip of your pi
+
+#VITE_TIMER_SLEEP_DELAY=17 # Default is 17
+#VITE_DISPLAY_SCROLL_SPEED=0.0005 # Default is 0.0005
 ```
 
 Now, before being able to run the script, we need to make sure everything is wired up correctly.
