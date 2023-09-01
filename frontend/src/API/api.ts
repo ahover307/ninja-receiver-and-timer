@@ -1,4 +1,4 @@
-const apiURL: string = import.meta.env.VITE_API_URL;
+import {apiURL} from "../Constants/Env.ts";
 
 export const getTimerStatus = async () => {
   const response = await fetch(`${apiURL}/currentStatus`, {

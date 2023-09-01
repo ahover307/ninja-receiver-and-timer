@@ -1,8 +1,8 @@
 import {createContext, ReactNode, useContext, useEffect} from "react";
 import {io, Socket} from "socket.io-client";
 import {toast} from "react-toastify";
+import {socketURL} from "../Constants/Env.ts";
 
-const socketURL: string = import.meta.env.VITE_SOCKET_URL;
 const socket = io(socketURL);
 
 interface SocketContextData {

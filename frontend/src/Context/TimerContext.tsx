@@ -2,8 +2,7 @@ import {createContext, useEffect, ReactNode, useContext, useState} from "react";
 import {useSocketContext} from "./SocketContext.tsx";
 import {useTimer} from "react-use-precision-timer";
 import {formatMillisecondsToTimeString} from "../utils/utils.ts";
-
-const timerSleepDelay: number = parseInt(import.meta.env.VITE_TIMER_SLEEP_DELAY) || 17;
+import {timerSleepDelay} from "../Constants/Env.ts";
 
 interface TimerContextData {
   stopwatchTime: number;
@@ -29,12 +28,12 @@ type TimerProviderProps = {
 }
 
 export const TimerProvider = (props: TimerProviderProps) => {
+  const {socket} = useSocketContext();
+
   const [stopwatchTime, setStopwatchTime] = useState(0);
   const stopwatchHandler = useTimer({delay: timerSleepDelay}, () =>
       setStopwatchTime(stopwatchHandler.getElapsedRunningTime()),
   );
-
-  const {socket} = useSocketContext();
 
   const startTimer = (elapsedTimeSinceStart: number) => {
     stopwatchHandler.start(Date.now() - elapsedTimeSinceStart);

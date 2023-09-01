@@ -1,8 +1,8 @@
 import {useDvdScreensaver} from "react-dvd-screensaver";
 import {useTimerContext} from "../Context/TimerContext.tsx";
 import "./Display.css";
+import {displayScrollSpeed} from "../Constants/Env.ts";
 
-const displayScrollSpeed: number = parseInt(import.meta.env.VITE_DISPLAY_SCROLL_SPEED) || 0.0005;
 
 export const Display = () => {
   const {formattedStopwatchTime} = useTimerContext();
