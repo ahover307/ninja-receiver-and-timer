@@ -1,0 +1,19 @@
+.display {
+  background-color: #8640ae;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.display-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.display-element {
+  color: whitesmoke;
+  font-weight: bolder;
+  font-size: xxx-large;
+  width: 250px;
+}
