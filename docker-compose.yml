@@ -23,6 +23,8 @@ services:
       - ninja-backend
     network_mode: host
     restart: unless-stopped
+    environment:
+      - PYTHONUNBUFFERED=1
   nginx:
     build:
       context: ./
