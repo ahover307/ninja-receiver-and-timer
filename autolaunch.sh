@@ -27,23 +27,26 @@ cd ~/Ninja-Receiver-and-timer || exit
 
 # Git pull to update the application
 git pull
-
 echo "Finished pulling"
 
 # Set up the docker containers
 docker compose up -d --build
-
 echo "Finished docker compose"
 
 # Hide the cursor
 #unclutter -idle 0.1
+#echo "Unclutter was activated"
 
-# Disable the screen saver
-echo "Unclutter was activated"
+
+# Prune old docker images no longer being used
+# This came around because of an out of storage error from the images just piling up over weeks
+docker system prune --all --force
+echo "Docker was pruned from old items"
+
+sleep 3
 
 # Open the browser to the application
 chromium-browser --kiosk --incognito --disable-session-crashed-bubble --disable-infobars http://localhost/display
-
 echo "And browser was launched"
 
 # Exit the script
