@@ -26,7 +26,7 @@ if __name__ == "__main__":
         sys.exit()
 
     # Create NRF24 object.
-    nrf = NRF24(pi, ce=25)
+    nrf = NRF24(pi, ce=25, pa_level=RF24_PA.MAX)
     nrf.set_payload_size(RF24_PAYLOAD.DYNAMIC)
 
     print("Opening reading pipe")
@@ -56,6 +56,7 @@ if __name__ == "__main__":
                     print(x.status_code)
                 else:
                     print('Unknown message received')
+                    print(s)
 
                 print("finished loop, waiting for next input")
             # Sleep 100 ms.
