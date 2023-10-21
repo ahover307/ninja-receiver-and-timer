@@ -10,7 +10,7 @@ import requests
 from nrf24 import *
 
 # address = 0xF0F0F0F0D2
-address = 80
+address = 120
 
 #
 # A simple NRF24L receiver that connects to a PIGPIO instance on a hostname and port, default "localhost" and 8888, and
