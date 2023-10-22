@@ -16,12 +16,14 @@ void setup() {
   pinMode(buttonLEDPin, OUTPUT);
 
   // Initialize the items
-  Serial.begin(9600);
+  Serial.begin(57600);
   radio.begin();
 
-  radio.enableDynamicPayloads();
-  radio.setPALevel(RF24_PA_MAX); // Set maximum power (The faa cant stop me)
-  radio.openWritingPipe(0xF0F0F0F0D2LL);
+  // radio.enableDynamicPayloads();
+  radio.setPALevel(RF24_PA_HIGH); // Set maximum power (The faa cant stop me)
+  // radio.setAutoAck(true);
+  // radio.openWritingPipe(0xF0F0F0F0D2LL);
+  radio.openWritingPipe(120);
 
   // Flash the button LED on launch
   digitalWrite(buttonLEDPin, HIGH);
@@ -42,7 +44,7 @@ void loop() {
   unsigned long currentMillis = millis();
 
   // Technically that means we will have the possibility of a debounce that is longer than intended once every 49 days, but I think that is a non-issue for us
-  if (currentMillis - previousMillis >= debounceMillis || (currentMillis < previousMillis && currentMillis > debounceMillis)) {
+  if (1 || currentMillis - previousMillis >= debounceMillis || (currentMillis < previousMillis && currentMillis > debounceMillis)) {
     if (digitalRead(buttonPin) == LOW) { // When button is pressed, the charge will clear
       if (digitalRead(rockerPin) == HIGH) { // if rocker is set to OFF, Transmit "START"
         Serial.println("sending START signal");
