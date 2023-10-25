@@ -64,7 +64,7 @@ case "$display_or_button" in
   "display")
     echo "Launching display"
     # Open the browser to the application
-    chromium-browser --kiosk --incognito --disable-session-crashed-bubble --disable-infobars http://localhost/display/paramount
+    chromium-browser --kiosk --incognito --disable-session-crashed-bubble --disable-infobars https://paramount-ninja-timer-a33c9.web.app/display/paramount
     ;;
   *)
     echo "Usage: $0 <display or button>"
