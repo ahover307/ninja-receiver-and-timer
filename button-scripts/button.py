@@ -75,7 +75,7 @@ def handle_error(e):
 
 def button_callback(channel):
     global button_depressed
-    if button_depressed:
+    if not button_depressed:
         print("Button pressed")
         body = {}
 
