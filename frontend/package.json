@@ -9,7 +9,7 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "push": "gh-pages -d dist",
+    "push": "firebase deploy --only hosting",
     "deploy": "npm run build && npm run push"
   },
   "dependencies": {
@@ -34,7 +34,6 @@
     "eslint": "^8.44.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
-    "gh-pages": "^6.0.0",
     "supabase": "^1.106.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
