@@ -3,11 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://ahover307.github.io/ninja-receiver-and-timer/",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "push": "gh-pages -d dist",
+    "deploy": "npm run build && npm run push"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.2",
@@ -31,6 +34,7 @@
     "eslint": "^8.44.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.1",
+    "gh-pages": "^6.0.0",
     "supabase": "^1.106.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.0"
