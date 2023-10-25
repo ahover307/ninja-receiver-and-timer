@@ -16,8 +16,8 @@ export const App = () => {
 
   const router = createBrowserRouter([
     {
-      path: "/:location", element: <div>Please go to /display/paramount, this page is not yet built</div>,
-      }, {
+      // path: "/:location", element: <Home/>,
+      // }, {
       path: "/display/:location",
       element: <Display supabase={supabase} />,
     },
