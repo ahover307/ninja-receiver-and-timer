@@ -5,6 +5,15 @@
 max_retries=5
 retries=0
 
+# Check for one argument
+if [ $# -ne 1 ]; then
+    echo "Usage: $0 <display or button>"
+    exit 1
+fi
+
+# Ingest the argument
+display_or_button=$1
+
 while [ $retries -lt $max_retries ]; do
     if ping -c 1 google.com &>/dev/null; then
         # Network is connected, proceed with your script
@@ -19,7 +28,7 @@ while [ $retries -lt $max_retries ]; do
 done
 
 if [ $retries -eq $max_retries ]; then
-    echo "Max retries reached. Exiting without running the script."
+    echo "Max retries reached, network can not connect. Exiting without running the script."
 fi
 
 # Change directory to the application directory
@@ -30,8 +39,8 @@ git pull
 echo "Finished pulling"
 
 # Set up the docker containers
-docker compose up -d --build
-echo "Finished docker compose"
+#docker compose up -d --build
+#echo "Finished docker compose"
 
 # Hide the cursor
 #unclutter -idle 0.1
@@ -40,14 +49,28 @@ echo "Finished docker compose"
 
 # Prune old docker images no longer being used
 # This came around because of an out of storage error from the images just piling up over weeks
-docker system prune --all --force
-echo "Docker was pruned from old items"
+#docker system prune --all --force
+#echo "Docker was pruned from old items"
 
-sleep 3
+#sleep 3
 
-# Open the browser to the application
-chromium-browser --kiosk --incognito --disable-session-crashed-bubble --disable-infobars http://localhost/display
-echo "And browser was launched"
+# If the argument is button, launch python script
+# If the argument is display, open the browser
+case "$display_or_button" in
+  "button")
+    echo "Launching button script"
+    python3 button-scripts/button.py &
+    ;;
+  "display")
+    echo "Launching display"
+    # Open the browser to the application
+    chromium-browser --kiosk --incognito --disable-session-crashed-bubble --disable-infobars http://localhost/display/paramount
+    ;;
+  *)
+    echo "Usage: $0 <display or button>"
+    exit 1
+    ;;
+esac
 
 # Exit the script
 exit 0

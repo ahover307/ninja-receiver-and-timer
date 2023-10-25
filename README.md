@@ -1,3 +1,9 @@
+This readme is actually out of date because I had to abandon the radios due to stupid EMF interference. I forgot that a large metal building might have issues with radio signals. I ended up using a pair raspberry pi zeros that connect to a normal webserver instead of the arduinos. Much less exciting, but still I'm pleased with how it arrived. 
+
+Uses supabase as a BaaS, and hosted just on github pages probably.
+
+---------------
+
 This project came from a desire at my gym to have a so-called 'buzzer' system. 
 A set of buttons that can be placed around the course that can be used to start and stop a timer that is hosted on the wall.
 Then, in classic form, I might have over-engineered this bit.

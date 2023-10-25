@@ -1,35 +1,27 @@
 import "./App.css";
-import {useEffect} from "react";
-import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import {Display} from "./components/Display.tsx";
-import {Home} from "./components/Home.tsx";
-import {getTimerStatus} from "./API/api.ts";
-import {useTimerContext} from "./Context/TimerContext.tsx";
+import { useEffect, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Display } from "./components/Display.tsx";
+import {createClient, SupabaseClient} from "@supabase/supabase-js";
+import { anon_key, endpoint } from "./Constants/Env.ts";
 
 export const App = () => {
-  const {setStopwatchTime, startTimer} = useTimerContext();
+  const [supabase, setSupabase] = useState<SupabaseClient>();
 
-  const getData = async () => {
-    const response = await getTimerStatus();
-
-    setStopwatchTime(response.elapsedTime);
-    if (response.isTimerRunning)
-      startTimer(response.elapsedTime);
-  };
-
-  // Get the timer status on a page load
   useEffect(() => {
-    void getData();
+    setSupabase(createClient(endpoint, anon_key));
   }, []);
+  
+  if (!supabase) return <div>Connecting to backend... loading</div>;
 
   const router = createBrowserRouter([
-        {
-          path: "/", element: <Home/>,
-        }, {
-          path: "/display", element: <Display/>,
-        }
-      ]
-  );
+    {
+      // path: "/:location", element: <Home/>,
+      // }, {
+      path: "/display/:location",
+      element: <Display supabase={supabase} />,
+    },
+  ]);
 
-  return <RouterProvider router={router}/>;
+  return <RouterProvider router={router} />;
 };
