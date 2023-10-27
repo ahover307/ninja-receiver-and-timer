@@ -34,8 +34,9 @@ fi
 # Change directory to the application directory
 cd ~/ninja-receiver-and-timer || exit
 
-# Git pull to update the application
-git pull
+# Hard update to the application to overwrite anything local
+git fetch --all
+git reset --hard origin/master
 echo "Finished pulling"
 
 # Set up the docker containers
