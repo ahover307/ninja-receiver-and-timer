@@ -32,7 +32,7 @@ if [ $retries -eq $max_retries ]; then
 fi
 
 # Change directory to the application directory
-cd ~/Ninja-Receiver-and-timer || exit
+cd ~/ninja-receiver-and-timer || exit
 
 # Git pull to update the application
 git pull
@@ -59,12 +59,15 @@ echo "Finished pulling"
 case "$display_or_button" in
   "button")
     echo "Launching button script"
-    python3 button-scripts/button.py &
+    # cd to button library, or exit if it fails, then compile and launch the program
+    cd button-scripts || exit
+    gcc -pthread -o button button.c -lpigpio -lcurl
+    sudo ./button
     ;;
   "display")
     echo "Launching display"
     # Open the browser to the application
-    chromium-browser --kiosk --incognito --disable-session-crashed-bubble --disable-infobars https://paramount-ninja-timer-a33c9.web.app/display/paramount
+    chromium-browser --kiosk --incognito --disable-session-crashed-bubble --disable-infobars https://c318ada5.ninja-receiver-and-timer.pages.dev/display/paramount
     ;;
   *)
     echo "Usage: $0 <display or button>"

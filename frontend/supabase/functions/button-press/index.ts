@@ -1,10 +1,10 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 Deno.serve(async (req) => {
   const currentTime = new Date().toISOString();
 
   if (req.method !== "POST") {
-    return new Response(JSON.stringify({ message: "method not supported" }), {
+    return new Response(JSON.stringify({ message: "REST method not supported" }), {
       headers: { "Content-Type": "application/json" },
       status: 405,
     });
@@ -87,10 +87,19 @@ Deno.serve(async (req) => {
 
     console.log(`Timer successfully stopped at ${location} at ${currentTime}`);
     data.message = "stopped";
+  } else if (action === "keepAlive") {
+    // const { data: timer } = await supabaseClient
+    //   .from("timers")
+    //   .select("*")
+    //   .eq("location", location);
+
+    return new Response(JSON.stringify({ message: "Kept alive" }), {
+      headers: { "Content-Type": "application/json" },
+    });
   } else {
     console.log(`Action ${action} not supported`);
-    return new Response(JSON.stringify({message: "action not supported"}), {
-      headers: {"Content-Type": "application/json"},
+    return new Response(JSON.stringify({ message: "action not supported" }), {
+      headers: { "Content-Type": "application/json" },
     });
   }
   return new Response(JSON.stringify(data), {

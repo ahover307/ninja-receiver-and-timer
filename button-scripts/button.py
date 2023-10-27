@@ -1,7 +1,8 @@
 from time import sleep
+from datetime import datetime, timezone
 
 import RPi.GPIO as GPIO
-import requests
+from supabase import Client, create_client
 
 # TODO Set up audio output
 # https://peppe8o.com/use-passive-buzzer-with-raspberry-pi-and-python/
@@ -15,10 +16,8 @@ buzzer_pin = 24 # TODO
 
 button_depressed = False
 
-# Define the HTTP endpoints
-endpoint = "https://mljtamuxwaodtztzjvcu.supabase.co/functions/v1/button-press"
-headers = {"Content-Type": "application/json",
-           "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sanRhbXV4d2FvZHR6dHpqdmN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwMTEwNjYsImV4cCI6MjAxMzU4NzA2Nn0.wY3laMqSqrPxsgAGKu8lOw-H5K4ChxzDbkoZt-knJas"}
+# Set up Supabase client
+supabase: Client = create_client("https://mljtamuxwaodtztzjvcu.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1sanRhbXV4d2FvZHR6dHpqdmN1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTgwMTEwNjYsImV4cCI6MjAxMzU4NzA2Nn0.wY3laMqSqrPxsgAGKu8lOw-H5K4ChxzDbkoZt-knJas")
 
 # Set up the button pin as an input with a pull-up resistor
 GPIO.setup(button_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
@@ -77,36 +76,52 @@ def button_callback(channel):
     global button_depressed
     if not button_depressed:
         print("Button pressed")
-        body = {}
 
         # Turn off the LED
         GPIO.output(led_pin, GPIO.LOW)
 
         # Determine which endpoint to call based on the switch state
         switch_state = GPIO.input(switch_pin)
+        set_to_start = True
+
         if switch_state == GPIO.HIGH:
             # Switch is turned off
             print("Starting")
-            body = {"action": "start", "location": "paramount"}
+            set_to_start = True
         else:
             print("Stopping")
-            body = {"action": "stop", "location": "paramount"}
+            set_to_start = False
 
-        try:
-            # Send an HTTP request to the selected endpoint
-            response = requests.post(endpoint, headers=headers, json=body)
-            if response.status_code == 200:
-                print("HTTP request successful")
-                play_buzzer()
+        a = datetime.now()
+        response = supabase.table("timers").select("*").eq("location", "paramount").single().execute()
+        if response.data['isRunning']:
+            print("It's running")
+            if set_to_start:
+                # If the timer is already running, stop the timer, and clear the times
+                print("Clearing the running timer")
+                supabase.table("timers").update({"isRunning": False, "startTime": None, "endTime": None}).eq("location", "paramount").execute()
             else:
-                handle_error(response)
-        except Exception as e:
-            print(f"An error occurred: {str(e)}")
+                # If we are stopping the timer, then keep the times, just stop the timer
+                print("Stopping the running timer")
+                supabase.table("timers").update({"isRunning": False, "endTime": datetime.now(timezone.utc)}).eq("location", "paramount").execute()
+        else:
+            if set_to_start:
+                # If the timer is not running, start the timer, and set the start time
+                print("Starting the stopped timer")
+                supabase.table("timers").update({"isRunning": True, "startTime": datetime.now(timezone.utc)}).eq("location", "paramount").execute()
+            else:
+                # If we are stopping the timer, the timer here, we don't really need to do anything
+                print("The timer is already stopped")
+                pass
+        b = datetime.now()
+        print(b - a)
 
         button_depressed = True
     else:
         print("Button released")
         button_depressed = False
+        GPIO.output(led_pin, GPIO.LOW)
+
 
 
 # Add an event listener for the button press
