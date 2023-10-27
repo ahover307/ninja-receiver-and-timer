@@ -196,7 +196,7 @@ int main() {
 
         printf("And we're off!\n");
 
-        while (1) { /* Keep program alive */ }
+        while (1) { sleep(30); }
     } else {
         fprintf(stderr, "curl_easy_init() failed\n");
     }
